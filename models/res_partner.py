@@ -8,7 +8,7 @@ class ResPartner(models.Model):
 
     @api.onchange('name')
     def _check_name_unique(self):
-        if self.search([('name', '=ilike', self.name)]):
+        if self.name and self.search([('name', '=ilike', self.name)]):
             return {
                 'warning': {
                     'title': _('Name repeated'),
@@ -18,7 +18,7 @@ class ResPartner(models.Model):
 
     @api.onchange('vat')
     def _check_vat_unique(self):
-        if self.search([('vat', '=', self.vat)]):
+        if self.vat and self.search([('vat', '=', self.vat)]):
             return {
                 'warning': {
                     'title': _('VAT repeated'),
